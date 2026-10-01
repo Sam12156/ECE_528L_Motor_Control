@@ -80,4 +80,7 @@ void Bumper_Switches_Init(void(*task)(uint8_t));
  */
 uint8_t Bumper_Read(void);
 
+
+
+
 #endif /* INC_BUMPER_SWITCHES_H_ */
