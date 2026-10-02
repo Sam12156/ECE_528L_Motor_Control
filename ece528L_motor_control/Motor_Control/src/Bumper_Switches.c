@@ -110,20 +110,5 @@ void PORT4_IRQHandler(void)
     (*Bumper_Task)(Bumper_Read());
 }
 
-/**
- * @brief Bumper switch interrupt handler function.
- *
- * This is the interrupt handler for the bumper switch interrupts. It is called when a falling edge event is detected on
- * any of the bumper switch pins. The function checks if a collision has already been detected; if not, it prints a collision
- * detection message along with the bumper switch state and sets the collision_detected flag to prevent further detections.
- *
- * @param bumper_switch_state An 8-bit unsigned integer representing the bumper switch states at the time of the interrupt.
- *
- * @return None
- */
-void Bumper_Switches_Handler(uint8_t bumper_switch_state)
-{
-    printf("Collision Detected! Bumper Switch State: 0x%02X\n", bumper_switch_state);
-    P8->OUT |= 0x80;
-}
+
 

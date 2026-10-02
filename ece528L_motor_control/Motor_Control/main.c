@@ -66,7 +66,6 @@ void SysTick_Handler(void)
         P8->OUT &= ~0x21;
     }
 }
-
 /**
  * @brief Bumper switch interrupt handler function.
  *
@@ -81,7 +80,10 @@ void SysTick_Handler(void)
 void Bumper_Switches_Handler(uint8_t bumper_switch_state)
 {
     printf("Collision Detected! Bumper Switch State: 0x%02X\n", bumper_switch_state);
+//    P8->OUT |= 0x80;
+    collision_detected=1;
 }
+
 
 /**
  * @brief Execute a predefined drive pattern using the DC motors.
@@ -219,27 +221,27 @@ int main(void)
 
     while(1)
     {
-        // Rotate to 0
-        Timer_A2_Update_Duty_Cycle_1(1700);
-        Timer_A2_Update_Duty_Cycle_2(1700);
-        LED2_Output(RGB_LED_RED);
-        Clock_Delay1ms(3000);
-
-        // Rotate to 180
-        Timer_A2_Update_Duty_Cycle_1(7000);
-        Timer_A2_Update_Duty_Cycle_2(7000);
-        LED2_Output(RGB_LED_BLUE);
-        Clock_Delay1ms(3000);
+//        // Rotate to 0
+//        Timer_A2_Update_Duty_Cycle_1(1700);
+//        Timer_A2_Update_Duty_Cycle_2(1700);
+//        LED2_Output(RGB_LED_RED);
+//        Clock_Delay1ms(3000);
+//
+//        // Rotate to 180
+//        Timer_A2_Update_Duty_Cycle_1(7000);
+//        Timer_A2_Update_Duty_Cycle_2(7000);
+//        LED2_Output(RGB_LED_BLUE);
+//        Clock_Delay1ms(3000);
 
 //        Drive_Pattern_1();
 //
-//        if (collision_detected == 1)
-//        {
-//            Handle_Collision();
-//        }
-//        else
-//        {
-//            Motor_Forward(4500, 4500);
-//        }
+        if (collision_detected == 1)
+        {
+            Handle_Collision();
+        }
+        else
+        {
+            Motor_Forward(4500, 4500);
+        }
     }
 }
